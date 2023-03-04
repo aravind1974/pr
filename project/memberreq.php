@@ -2,7 +2,7 @@
 <?php include("func.php");?>
 <html>
 <head>
-	<title>Trainer details</title>
+	<title>Members Request</title>
 	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 </head>
 <body>
@@ -17,10 +17,10 @@
       <li class="nav-item ">
         <a class="nav-link" href="admin-panel.php">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item active">
         <a class="nav-link" href="member_details.php">Members</a>
       </li>
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link" href="Trainer.php">Trainers</a>
       </li>
       <li class="nav-item">
@@ -35,6 +35,7 @@
     </form>
   </div>
 </nav>
+
 <div class="jumbotron" style="background: url('images/2.jpg') no-repeat;background-size: cover;height: 300px;"></div>
 
  <div class="container">
@@ -42,57 +43,54 @@
      <div class="card-body" style="background-color:black;color:white;">
          <div class="row">
              <div class="col-md-1">
-    <a href="admin-panel.php" class="btn btn-light ">Go Back</a>
+    <a href="admin-panel.php" class="btn btn-light "> Back</a>
              </div>
-             <div class="col-md-3"><h3> Trainer Information</h3></div>
+             <div class="col-md-3"><h3>Members Requests</h3></div>
              <div class="col-md-8">
-         </div></div>
+         <form class="form-group" action="trainer_search.php" method="post">
+          <div class="row">
+   <div class="col-md-10"><input type="text" name="search" class="form-control" placeholder="enter contact"></div>
+              <div class="col-md-2"><input type="submit" name="patient_search_submit" class="btn btn-light" value="Search"> </div></div>
+                 </form></div></div></div>
      <div class="card-body" style="background-color:grey;color:#ffffff;">
          <div class="card-body">
     <table class="table table-hover">
         <thead>
      <tr>
-            <th>Trainer ID</th>
             <th>Name</th>
-         <th>Phone</th>
-
+            <th>Age</th>
+         <th>Gender</th>
+         <th>Height</th>
+         <th>Weight</th>
+	<th>Approve</th>
         </tr>
         </thead>
         <tbody>
-          <?php
+					<?php
+				     $con=mysqli_connect("localhost","root","","loginsystem");
+				     $query="select * from user where approve='NO'";
+				     $result=mysqli_query($con,$query);
+				     while ($row=mysqli_fetch_array($result)){
+				          $name=$row ['username'];
+				     $age=$row['age'];
+				     $gender=$row['gender'];
+				     $height=$row['height'];
+				     $weight=$row['weight'];
 
+				       echo "<tr>
 
-          global $con;
-           $query="select * from trainer where approve='yes'";
-           $result=mysqli_query($con,$query);
-           while($row=mysqli_fetch_array($result)){
-               $Trainer_id=$row ['Trainer_id'];
-               $Name=$row['Name'];
-               $phone=$row['phone'];
-               echo"<tr>
-               <td>$Trainer_id</td>
-               <td>$Name</td>
-                   <td>$phone</td>
-                   </tr>
-               </tr>";
+				         <td>$name</td>
+				             <td>$age</td>
+				             <td>$gender</td>
+				           <td>$height</td>
+				 	 <td>$weight</td> ";
 
-// $id = $_GET['id'];
+?><td><a href="approve.php?id=<?php echo $row['uid'];?>">Approve</a></td>
+  <td><a href="reject.php?id=<?php echo $row['uid'];?>">Reject</a></td><?php
+				    echo "     </tr>";}?>
 
-
-
-
-
-
-
-               }
-              /*  if ($id) {
-                       echo "Selected ID: " . $id;
-
-                     }*/
-                   ?>
         </tbody>
     </table>
-
      </div>
     </div>
     </div>
@@ -103,3 +101,5 @@
     </div>
     </body>
 </html>
+
+//

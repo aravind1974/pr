@@ -55,7 +55,7 @@
             <th>Trainer ID</th>
             <th>Name</th>
          <th>Phone</th>
-
+             <th>Approve</th>
         </tr>
         </thead>
         <tbody>
@@ -63,7 +63,7 @@
 
 
           global $con;
-           $query="select * from trainer where approve='yes'";
+           $query="select * from trainer";
            $result=mysqli_query($con,$query);
            while($row=mysqli_fetch_array($result)){
                $Trainer_id=$row ['Trainer_id'];
@@ -73,10 +73,10 @@
                <td>$Trainer_id</td>
                <td>$Name</td>
                    <td>$phone</td>
-                   </tr>
+                   <td><a href='approvetr?id=" . $row["Trainer_id"] . "'  >Approve</a></td></tr>
                </tr>";
 
-// $id = $_GET['id'];
+ $id = $_GET['id'];
 
 
 
@@ -85,10 +85,10 @@
 
 
                }
-              /*  if ($id) {
+                if ($id) {
                        echo "Selected ID: " . $id;
 
-                     }*/
+                     }
                    ?>
         </tbody>
     </table>

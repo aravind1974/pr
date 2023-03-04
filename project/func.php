@@ -8,7 +8,7 @@ if(isset($_POST['login_submit'])){
     if(mysqli_num_rows($result)==1)
     {
         header("Location:admin-panel.php");
-    
+
 }
     else
     {
@@ -30,7 +30,7 @@ if(isset($_POST['pat_submit']))
       echo "<script>alert('Member added.')</script>";
         echo "<script>window.open('admin-panel.php','_self')</script>";
     }
-    } 
+    }
     if(isset($_POST['tra_submit']))
     {
         $Trainer_id=$_POST['Trainer_id'];
@@ -43,7 +43,7 @@ if(isset($_POST['pat_submit']))
           echo "<script>alert('Trainer added.')</script>";
             echo "<script>window.open('admin-panel.php','_self')</script>";
         }
-        } 
+        }
 
 
         if(isset($_GET['pay_submit']))
@@ -59,27 +59,54 @@ if(isset($_POST['pat_submit']))
                 echo "<script>alert('payment added.')</script>";
                 echo "<script>window.open('admin-panel.php','_self')</script>";
              }
-            
-               
-        } 
 
+
+        }
+
+ function get_memberreq(){
+    $con=mysqli_connect("localhost","root","","loginsystem");
+    $query="select * from user where approve='NO'";
+    $result=mysqli_query($con,$query);
+    while ($row=mysqli_fetch_array($result)){
+         $name=$row ['username'];
+    $age=$row['age'];
+    $gender=$row['gender'];
+    $height=$row['height'];
+    $weight=$row['weight'];
+    $tid=$row['t_id'];
+      echo "<tr>
+
+        <td>$name</td>
+            <td>$age</td>
+            <td>$gender</td>
+          <td>$height</td>
+	 <td>$weight</td>
+	<td>$tid</td>
+
+
+        </tr>";
+    }
+}
 
  function get_member_details(){
     $con=mysqli_connect("localhost","root","","loginsystem");
-    $query="select * from doctorapp";
+    $query="select * from user where approve='YES'";
     $result=mysqli_query($con,$query);
     while ($row=mysqli_fetch_array($result)){
-         $fname=$row ['fname'];
-    $lname=$row['lname'];
-    $email=$row['email'];
-    $contact=$row['contact'];
-    $docapp=$row['docapp'];
+         $name=$row ['username'];
+    $age=$row['age'];
+    $gender=$row['gender'];
+    $height=$row['height'];
+    $weight=$row['weight'];
+    $tid=$row['t_id'];
       echo "<tr>
-          <td>$fname</td>
-        <td>$lname</td>
-            <td>$email</td>
-            <td>$contact</td>
-          <td>$docapp</td>
+
+        <td>$name</td>
+            <td>$age</td>
+            <td>$gender</td>
+          <td>$height</td>
+	 <td>$weight</td>
+	<td>$tid</td>
         </tr>";
     }
 }
@@ -95,7 +122,7 @@ function get_package(){
         <td>$Package_id</td>
         <td>$Package_name</td>
             <td>$Amount</td>
-            
+
         </tr>";
 
     }
@@ -126,13 +153,13 @@ function get_payment(){
         $Amount=$row['Amount'];
         $customer_id=$row['customer_id'];
         $payment_type=$row['payment_type'];
-        
+
         echo"<tr>
         <td>$Payment_id</td>
         <td>$Amount</td>
         <td>$payment_type</td>
         <td>$customer_id</td>
-    
+
             </tr>";
 
     }
