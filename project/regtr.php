@@ -28,7 +28,7 @@
             <div class="card-body" style="background-color:grey;">
               <center style="">
 
-              <form class="form-group" method="POST" action="register.php">
+              <form class="form-group" method="POST" action="regtr.php" enctype="multipart/form-data">
                 <div class="row">
 
                 <div class="col-md-4"><label style="color: white;"> Username:</label></div>
@@ -41,19 +41,21 @@
                 <div class="col-md-8"><input type="number" class="form-control" id="weight" name="weight"></div><br><br>
                 <div class="col-md-4"><label style="color: white;"> Age:</label></div>
                 <div class="col-md-8"><input type="number" class="form-control" id="age" name="age"></div><br><br>
-
+                <div class="col-md-4"><label style="color: white;">  Attach certificate </label></div>
+                 <div class="col-md-8"><input type="file" name="file"  required  id="fil" size="50"></div>
 
                 <div class="col-md-4"><label style="color: white;"> Male</label></div>
                 <div class="col-md-8"><input type="radio" class="form-control" id="male" name="gender" value="male"></div>
 
               <div class="col-md-4"><label style="color: white;"> Female</label></div>
                  <div class="col-md-8"><input type="radio" class="form-control" id="female" name="gender" value="female"></div></div><br><br>
-                <center><input type="submit" id="inputbtn" name="register" value="Register" class="btn btn-success"> </center>
+
+                 <center><input type="submit" id="inputbtn" name="register" value="Register" class="btn btn-success"> </center>
+
               </form>
 
               <a href="index.php">Login</a><br>
-              <a href="regtr.php">Register as a Trainer</a>
-
+              <a href="register.php">Register as a User</a>
         <?php
 
   if (isset($_POST['username']) &&
@@ -70,6 +72,19 @@
     $age = $_POST['age'];
     $gender = $_POST['gender'];
 
+// $target_file =$_POST['file'];
+  //  $file = $_POST['file'];
+
+           $target_dir = "uploads/";
+           $target_file = $target_dir . basename ($_FILES['file']['name']);
+           if (move_uploaded_file($_FILES['file']['tmp_name'], $target_file)) {
+               echo "File uploaded successfully.";
+           } else {
+               echo "Error uploading file.";
+           }
+
+
+
     $servername = "localhost";
     $dbusername = "root";
     $dbpassword = "";
@@ -83,12 +98,12 @@
       die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "INSERT INTO user (username, password, height, weight, age, gender)
-            VALUES ('$username', '$password', '$height', '$weight', '$age', '$gender')";
+    $sql = "INSERT INTO trainer (username, password, height, weight, age, gender,file)
+            VALUES ('$username', '$password', '$height', '$weight', '$age', '$gender','$target_file')";
 
     if ($conn->query($sql) === TRUE) {
       echo "New record created successfully";
-       header("Location: index.php");
+      // header("Location: index.php");
     } else {
       echo "Error: " . $sql . "<br>" . $conn->error;
     }

@@ -5,5 +5,5 @@ $sql="DELETE FROM `user` WHERE `user`.`uid` = {$id}";
 $result=mysqli_query($conn,$sql) or die("Query unsuccessfull");
 
 
-header("admin-panel.php");
+header("Location:admin-panel.php");
 ?>

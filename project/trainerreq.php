@@ -2,7 +2,7 @@
 <?php include("func.php");?>
 <html>
 <head>
-	<title>Trainer details</title>
+	<title>Trainer Requests</title>
 	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 </head>
 <body>
@@ -56,6 +56,7 @@
             <th>Name</th>
          <th>Phone</th>
              <th>Approve</th>
+						 <th>Reject	</th>
         </tr>
         </thead>
         <tbody>
@@ -63,7 +64,7 @@
 
 
           global $con;
-           $query="select * from trainer";
+           $query="select * from trainer where approve='NO'";
            $result=mysqli_query($con,$query);
            while($row=mysqli_fetch_array($result)){
                $Trainer_id=$row ['Trainer_id'];
@@ -73,22 +74,13 @@
                <td>$Trainer_id</td>
                <td>$Name</td>
                    <td>$phone</td>
-                   <td><a href='approvetr?id=" . $row["Trainer_id"] . "'  >Approve</a></td></tr>
+                   <td><a href='approvetr.php?id=" . $row["Trainer_id"] . "'  >Approve</a></td>
+									 <td><a href='rejecttr.php?id=" . $row["Trainer_id"] . "' >Reject</a></td></tr>
                </tr>";
-
- $id = $_GET['id'];
-
-
-
-
-
 
 
                }
-                if ($id) {
-                       echo "Selected ID: " . $id;
 
-                     }
                    ?>
         </tbody>
     </table>

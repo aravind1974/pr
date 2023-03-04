@@ -8,7 +8,7 @@ b, i,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, figcaption, figure, 
+article, aside, canvas, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section, summary,
 time, mark, audio, video {
     margin:0;
@@ -34,7 +34,7 @@ body {
 
 
 article,aside,details,figcaption,figure,
-footer,header,hgroup,menu,nav,section { 
+footer,header,hgroup,menu,nav,section {
     display:block;
 }
 
@@ -70,7 +70,7 @@ ins {
 
 mark {
     background-color:#ff9;
-    color:#000; 
+    color:#000;
     font-style:italic;
     font-weight:bold;
 }
@@ -93,7 +93,7 @@ table {
 hr {
     display:block;
     height:1px;
-    border:0;   
+    border:0;
     border-top:1px solid #cccccc;
     margin:1em 0;
     padding:0;
@@ -119,7 +119,7 @@ body{
 }
 
 header nav{
-	width: 100%; 
+	width: 100%;
 	height: 60px;
 	background-color: #fff;
 }
@@ -152,7 +152,7 @@ header .nav-login form {
 }
 
 header .nav-login form input {
-	float: left; 
+	float: left;
 	width: 140px;
 	height: 30px;
 	padding: 0px 10px;
@@ -162,8 +162,8 @@ header .nav-login form input {
 	font-family: arial;
 	font-size: 14px;
 	color: #111;
-	line-height: 30px; 
-	
+	line-height: 30px;
+
 }
 
 header .nav-login form button {
@@ -177,11 +177,11 @@ header .nav-login form button {
 	font-size: 14px;
 	color: #111;
 	cursor: pointer;
-	
+
 }
 
 header .nav-login form button:hover {
-	 
+
 	 background-color: #ccc;
 }
 
@@ -198,11 +198,11 @@ header .nav-login a {
 	color: #111;
 	line-height: 63px;
     cursor: pointer;
-}   
+}
 
 .main-container{
 	padding-top: 40px;
-}	
+}
 
 .main-container h2{
 	font-family: arial;
@@ -210,19 +210,19 @@ header .nav-login a {
 	color: #111;
 	line-height: 50px;
 	text-align: center;
-	
-}	 
-  
- 
+
+}
+
+
 
 .signup-form {
 	width: 400px;
 	margin: 0 auto;
 	padding-top: 30px;
-} 
+}
 
 .signup-form input {
-	  
+
 	width: 90%;
 	height: 40px;
 	padding: 0px 5%;
@@ -233,10 +233,10 @@ header .nav-login a {
 	font-size: 16px;
 	color: #111;
 	line-height: 40px;
-}  
+}
 
 .signup-form button {
-	display: block;  
+	display: block;
 	margin: 0 auto;
 	width: 30%;
 	height: 40px;
