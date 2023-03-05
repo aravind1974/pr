@@ -73,6 +73,8 @@ echo $id;
           $query="select * from user where approve='YES' and t_id={$id}";
           $result=mysqli_query($con,$query);
           while ($row=mysqli_fetch_array($result)){
+
+               $uid=$row['uid'];
                $name=$row ['username'];
           $age=$row['age'];
           $gender=$row['gender'];
@@ -87,8 +89,8 @@ echo $id;
                 <td>$height</td>
          <td>$weight</td>
         <td>$tid</td>
-        <td><a href='workout.php?id=" . $name . "'  >Workout</a></td>
-        <td><a href='diet.php?id=" . $name . "'  >Diet</a></td>
+        <td><a href='workouts.php?id=" . $uid . "'  >Workout</a></td>
+        <td><a href='diet.php?id=" . $uid. "'  >Diet</a></td>
               </tr>";
           }
 

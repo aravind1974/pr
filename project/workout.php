@@ -92,7 +92,9 @@
 
 //....................
 						 if ($result->num_rows > 0) {
-						     echo "<form method='post'>";
+						     echo '<form method="post">
+								 <div class="col-md-4"><label style="color: white;">  Name:</label></div>
+							 	<div class="col-md-8"><input type="text" name="name" class="form-control" placeholder="Enter name" required/></div><br><br>';
 
 
 						     while($row = $result->fetch_assoc()) {
@@ -105,11 +107,12 @@
 						     }
 						     echo "</table>";
 								 echo '<center><input type="submit" id="inputbtn" name="submit" value="Submit" class="btn btn-success"> </center>';
-						    echo'<br><a href="addex.php" class="btn btn-success"><i class="fa fa-sign-out" aria-hidden="true"></i>Add new exercise</a>';// echo "<input type='submit' value='Submit'>";
+
 						     echo "</form>";
 						 } else {
 						     echo "0 results";
 						 }
+						 echo'<br><a href="addex.php" class="btn btn-success"><i class="fa fa-sign-out" aria-hidden="true"></i>Add new exercise</a>';// echo "<input type='submit' value='Submit'>";
 
 						 // Close connection
 						 $conn->close();
@@ -124,20 +127,22 @@
 						         } else {
 						             // Process selected checkboxes
 						        {
-
+$name=$_POST['name'];
 														 $id1 = $selected[0];
             $id2 = $selected[1] ?? 0; // Assign null if not set
             $id3 = $selected[2] ?? 0;
             $id4 = $selected[3] ?? 0;
             $id5 = $selected[4] ?? 0;
 
-					//	echo "dcs".$id4;
+						echo $name;
 						                 //echo "Selected ID: " . $id1 . "<br>";
-														 $sql="INSERT INTO `wo` (`e1`, `e2`, `e3`, `e4`, `e5`) VALUES($id1,$id2,$id3,$id4,$id5)";
+														 $sql="INSERT INTO `wo` (`ename`,`e1`, `e2`, `e3`, `e4`, `e5`) VALUES('$name',$id1,$id2,$id3,$id4,$id5)";
 														 	$result=mysqli_query($con,$sql)or die("error");
 															if($result)
 															{
-																header('Location:workouts.php');
+
+																$id=$_GET['id'];
+																header('Location:workouts.php?id='.$id.' ');
 
 															}
 
