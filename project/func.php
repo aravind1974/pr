@@ -88,6 +88,11 @@ if(isset($_POST['pat_submit']))
     }
 }
 
+
+
+
+
+
  function get_member_details(){
     $con=mysqli_connect("localhost","root","","loginsystem");
     $query="select * from user where approve='YES'";

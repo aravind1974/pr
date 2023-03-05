@@ -41,14 +41,15 @@ $databaseName = "loginsystem";
 $connect = mysqli_connect($hostname, $username, $password, $databaseName);
 
 // mysql select query
-$query = "SELECT * FROM `user` WHERE  uid=$uid";
+//echo $uid;
+$query = "SELECT * FROM `trainer` WHERE  username='$uid'";
 
 // for method 1
 
 $result = mysqli_query($connect, $query);
 $row = mysqli_fetch_assoc($result);
 $uname=$row ['username'];
-$tid=$row['t_id'];
+
 //echo $uname;
 ?>
 <html>
@@ -69,7 +70,7 @@ $tid=$row['t_id'];
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="admin-panel.php">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="trainerhome.php">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="member_details.php">Members</a>
@@ -124,8 +125,9 @@ $tid=$row['t_id'];
 
 
 
-                 <a href="view_diet.php" class="list-group-item" style="color:black;">View Diet</a>
-                 <a href="view_workout.php" class="list-group-item" style="color:black;">View Workout</a>
+              <?php echo "<a href='memtr.php?id=" . $row["Trainer_id"] . "' class='list-group-item' style='color:black' >Member</a>";?>
+
+                 <a href="memp.php" class="list-group-item" style="color:black;">Pending Members</a>
 
 
 
@@ -143,23 +145,6 @@ $tid=$row['t_id'];
 <li  class="list-group-item" style="color:white;background: black;font-size: 20px;"><i class="fa fa-user-secret" aria-hidden="true"></i> <b>Trainer</b></li>
 
 
-
-<?php  //  echo $uid;
-
-            if (is_null($tid))
-             {
-              //echo "dryf";
-              //echo '<a href="trainer.php" class="list-group-item " style="color:black;"><u>Trainer</u></a>';
-echo "<a href='trainer.php?id=" . $row["uid"] . "' class='list-group-item' style='color:black' >Trainer</a>";
-             }
-            else{
-                //echo $uname;
-              echo "<a href='traineru.php?id=" . $row["t_id"] . "' class='list-group-item' style='color:black' >Trainer</a>";
-
-
-              }
-
-        ?>
 
 
 

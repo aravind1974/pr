@@ -40,7 +40,9 @@ echo "sasdfedfd";
 
 
 
-    header("Location: admin-panel.php");
+
+
+     header("Location: admin-panel.php");
     } else {
       // Redirect to failure page
       header("Location:index.php");
@@ -51,12 +53,15 @@ echo "sasdfedfd";
 
    elseif($selected == "option2") {
 
-    $sql = "SELECT * FROM trainer WHERE Trainer_id = '{$entered_username}' and password = '{$entered_password}' and approve='yes'";
+    $sql = "SELECT * FROM trainer WHERE username = '{$entered_username}' and password = '{$entered_password}' and approve='yes'";
     $result = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($result) == 1) {
       // Redirect to success page
-    header("Location: trainer.php");
+       $row = mysqli_fetch_assoc($result);
+            $uid=$row ['username'];
+            $_SESSION['uid']=$uid;
+    header("Location: trainerhome.php");
     } else {
       // Redirect to failure page
       header("Location:index.php");
