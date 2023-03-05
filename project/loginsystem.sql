@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Mar 04, 2023 at 01:20 PM
--- Server version: 5.7.31
--- PHP Version: 7.3.21
+-- Host: localhost
+-- Generation Time: Nov 23, 2017 at 08:01 AM
+-- Server version: 10.1.28-MariaDB
+-- PHP Version: 7.1.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -24,11 +25,37 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `doctorapp`
+--
+
+CREATE TABLE `doctorapp` (
+  `fname` varchar(40) NOT NULL,
+  `lname` varchar(40) NOT NULL,
+  `email` varchar(40) NOT NULL,
+  `contact` varchar(40) NOT NULL,
+  `docapp` varchar(60) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `doctorapp`
+--
+
+INSERT INTO `doctorapp` (`fname`, `lname`, `email`, `contact`, `docapp`) VALUES
+('Raj', 'kumar', 'kumar@gmail.com', '201', '101'),
+('saurabh', 'kumar', 'kumar121@gmail.com', '202', '102'),
+('surya', 'raj', 'raj1242gmail.com', '203', '101'),
+('Raman', 'kumar', 'raman@gmail.com', '204', '103'),
+('Aadarsh', 'thakur', 'thakur@gmail.com', '205', '103'),
+('Rahul', 'kumar', 'rahul@gmail.com', '206', '102'),
+('Sanjeev', 'Verma', 'verma12@gmail.com', '207', '103');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `logintb`
 --
 
-DROP TABLE IF EXISTS `logintb`;
-CREATE TABLE IF NOT EXISTS `logintb` (
+CREATE TABLE `logintb` (
   `username` varchar(40) NOT NULL,
   `password` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -43,22 +70,20 @@ INSERT INTO `logintb` (`username`, `password`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `package`
+-- Table structure for table `Package`
 --
 
-DROP TABLE IF EXISTS `package`;
-CREATE TABLE IF NOT EXISTS `package` (
+CREATE TABLE `Package` (
   `Package_id` varchar(40) NOT NULL,
   `Package_name` varchar(40) NOT NULL,
-  `Amount` int(20) NOT NULL,
-  PRIMARY KEY (`Package_id`)
+  `Amount` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `package`
+-- Dumping data for table `Package`
 --
 
-INSERT INTO `package` (`Package_id`, `Package_name`, `Amount`) VALUES
+INSERT INTO `Package` (`Package_id`, `Package_name`, `Amount`) VALUES
 ('121', 'preliminary', 800),
 ('122', 'Wt. gain', 1500),
 ('123', 'Wt.loss', 1000);
@@ -66,23 +91,21 @@ INSERT INTO `package` (`Package_id`, `Package_name`, `Amount`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `payment`
+-- Table structure for table `Payment`
 --
 
-DROP TABLE IF EXISTS `payment`;
-CREATE TABLE IF NOT EXISTS `payment` (
+CREATE TABLE `Payment` (
   `Payment_id` int(10) NOT NULL,
   `Amount` int(20) NOT NULL,
   `customer_id` varchar(20) NOT NULL,
-  `payment_type` varchar(20) NOT NULL,
-  PRIMARY KEY (`Payment_id`)
+  `payment_type` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `payment`
+-- Dumping data for table `Payment`
 --
 
-INSERT INTO `payment` (`Payment_id`, `Amount`, `customer_id`, `payment_type`) VALUES
+INSERT INTO `Payment` (`Payment_id`, `Amount`, `customer_id`, `payment_type`) VALUES
 (301, 1500, '201', 'cash'),
 (302, 800, '202', 'card'),
 (303, 1000, '203', 'cheque'),
@@ -91,77 +114,52 @@ INSERT INTO `payment` (`Payment_id`, `Amount`, `customer_id`, `payment_type`) VA
 -- --------------------------------------------------------
 
 --
--- Table structure for table `trainer`
+-- Table structure for table `Trainer`
 --
 
-DROP TABLE IF EXISTS `trainer`;
-CREATE TABLE IF NOT EXISTS `trainer` (
+CREATE TABLE `Trainer` (
   `Trainer_id` int(20) NOT NULL,
   `Name` varchar(40) NOT NULL,
-  `phone` int(100) NOT NULL,
-  `passsword` int(11) NOT NULL,
-  `approve` varchar(4) NOT NULL DEFAULT 'NO',
-  PRIMARY KEY (`Trainer_id`)
+  `phone` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `trainer`
+-- Dumping data for table `Trainer`
 --
 
-INSERT INTO `trainer` (`Trainer_id`, `Name`, `phone`, `passsword`, `approve`) VALUES
-(101, 'Rakesh', 12365489, 0, 'NO'),
-(102, 'Ravi', 21365789, 0, 'NO'),
-(103, 'wasim', 123564789, 0, 'NO'),
-(104, 'Sameer', 12536987, 0, 'NO');
-
--- --------------------------------------------------------
+INSERT INTO `Trainer` (`Trainer_id`, `Name`, `phone`) VALUES
+(101, 'Rakesh', 12365489),
+(102, 'Ravi', 21365789),
+(103, 'wasim', 123564789),
+(104, 'Sameer', 12536987);
 
 --
--- Table structure for table `user`
+-- Indexes for dumped tables
 --
 
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE IF NOT EXISTS `user` (
-  `uid` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(20) NOT NULL,
-  `password` varchar(50) NOT NULL,
-  `age` int(11) NOT NULL,
-  `gender` varchar(8) NOT NULL,
-  `height` int(11) NOT NULL,
-  `weight` int(11) NOT NULL,
-  `t_id` int(11) DEFAULT NULL,
-  `approve` varchar(3) DEFAULT 'NO',
-  PRIMARY KEY (`uid`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+--
+-- Indexes for table `doctorapp`
+--
+ALTER TABLE `doctorapp`
+  ADD PRIMARY KEY (`contact`);
 
 --
--- Dumping data for table `user`
+-- Indexes for table `Package`
 --
-
-INSERT INTO `user` (`uid`, `username`, `password`, `age`, `gender`, `height`, `weight`, `t_id`, `approve`) VALUES
-(2, 'wer', 'fghfhdg', 33, 'male', 23, 12, NULL, 'yes'),
-(3, 'dfb', 'xcvc', 23, 'male', 122, 121, NULL, 'yes');
-
--- --------------------------------------------------------
+ALTER TABLE `Package`
+  ADD PRIMARY KEY (`Package_id`);
 
 --
--- Table structure for table `workout`
+-- Indexes for table `Payment`
 --
-
-DROP TABLE IF EXISTS `workout`;
-CREATE TABLE IF NOT EXISTS `workout` (
-  `e_name` varchar(20) NOT NULL,
-  `sets` int(11) NOT NULL,
-  `reps` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+ALTER TABLE `Payment`
+  ADD PRIMARY KEY (`Payment_id`);
 
 --
--- Dumping data for table `workout`
+-- Indexes for table `Trainer`
 --
-
-INSERT INTO `workout` (`e_name`, `sets`, `reps`) VALUES
-('abcd', 8, 8),
-('bcd', 9, 8);
+ALTER TABLE `Trainer`
+  ADD PRIMARY KEY (`Trainer_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

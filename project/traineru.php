@@ -35,14 +35,14 @@
     </form>
   </div>
 </nav>
-<div class="jumbotron" style="background: url('images/2.png') no-repeat;background-size: cover;height: 700px;">
+<div class="jumbotron" style="background: url('images/2.jpg') no-repeat;background-size: cover;height: 300px;"></div>
 
  <div class="container">
 <div class="card">
      <div class="card-body" style="background-color:black;color:white;">
          <div class="row">
              <div class="col-md-1">
-    <a href="user.php" class="btn btn-light ">Go Back</a>
+    <a href="admin-panel.php" class="btn btn-light ">Go Back</a>
              </div>
              <div class="col-md-3"><h3> Trainer Information</h3></div>
              <div class="col-md-8">
@@ -73,27 +73,34 @@
 					 $gender=$row['gender'];
 					 $height=$row['height'];
 					 $weight=$row['weight'];
-
+					 $tid=$row['t_id'];
 						 echo "<tr>
 
 							 <td>$name</td>
 									 <td>$age</td>
 									 <td>$gender</td>
 								 <td>$height</td>
-				 <td>$weight</td> ";
+				 <td>$weight</td>";
+				     if(is_null($tid))
+						 	{ echo "<td><a href='select.php?id=" . $row["Trainer_id"] . "'  >Select</a></td></tr>";}
+
+// $id = $_GET['id'];
 
 
-          if (isset($_GET['id'])) {
- $id = $_GET['id'];
-					///	session_start();
-						//	 $uid = $_SESSION['uid'];
-                      echo "<td><a href='select.php?id=" . $row["Trainer_id"] . "'  >Select</a></td> ";
 
-                     }
-               }     ?>
+
+
+
+
+               }
+              /*  if ($id) {
+                       echo "Selected ID: " . $id;
+
+                     }*/
+                   ?>
         </tbody>
     </table>
-</div>
+
      </div>
     </div>
     </div>

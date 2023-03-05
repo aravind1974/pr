@@ -52,9 +52,12 @@
     <table class="table table-hover">
         <thead>
      <tr>
-            <th>Trainer ID</th>
             <th>Name</th>
-         <th>Phone</th>
+            <th>Age</th>
+						<th>Gender</th>
+						<th>Height</th>
+						<th>Weight</th>
+        
              <th>Approve</th>
 						 <th>Reject	</th>
         </tr>
@@ -66,14 +69,21 @@
           global $con;
            $query="select * from trainer where approve='NO'";
            $result=mysqli_query($con,$query);
-           while($row=mysqli_fetch_array($result)){
-               $Trainer_id=$row ['Trainer_id'];
-               $Name=$row['Name'];
-               $phone=$row['phone'];
-               echo"<tr>
-               <td>$Trainer_id</td>
-               <td>$Name</td>
-                   <td>$phone</td>
+					 $result=mysqli_query($con,$query);
+					while ($row=mysqli_fetch_array($result)){
+								 $name=$row ['username'];
+						$age=$row['age'];
+						$gender=$row['gender'];
+						$height=$row['height'];
+						$weight=$row['weight'];
+
+						echo "<tr>
+
+							<td>$name</td>
+									<td>$age</td>
+									<td>$gender</td>
+								<td>$height</td>
+				<td>$weight</td>
                    <td><a href='approvetr.php?id=" . $row["Trainer_id"] . "'  >Approve</a></td>
 									 <td><a href='rejecttr.php?id=" . $row["Trainer_id"] . "' >Reject</a></td></tr>
                </tr>";

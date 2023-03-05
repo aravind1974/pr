@@ -63,6 +63,7 @@
          <th>Height</th>
          <th>Weight</th>
 	<th>Approve</th>
+		<th>Reject</th>
         </tr>
         </thead>
         <tbody>

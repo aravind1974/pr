@@ -5,5 +5,5 @@ $sql="UPDATE `user` SET `approve` = 'yes' WHERE `user`.`uid` = {$id}";
 $result=mysqli_query($conn,$sql) or die("Query unsuccessfull");
 if($result)
 
-header("Location:admin-panel.php");
+header("Location:memberreq.php");
 ?>

@@ -2,7 +2,14 @@
 <?php
 
 // php select option value from database
+session_start();
+if(!$_SESSION['uid'])
+{
+    echo "Invalid Login";
+  echo'<a href="logout.php" class="btn btn-success"><i class="fa fa-sign-out" aria-hidden="true"></i>Login</a>';
 
+exit();
+}
 $hostname = "localhost";
 $username = "root";
 $password = "";
@@ -60,7 +67,7 @@ $result1 = mysqli_query($connect, $query);
 
     <?php
                 if (isset($_SESSION['u_id'])) {
-              echo '<form action="index.php" method="POST">
+              echo '<form action="logout.php" method="POST">
                       <button type="submit" name="submit">logout</button>
                         </form>';
                                  } else{
@@ -69,7 +76,7 @@ $result1 = mysqli_query($connect, $query);
 
 
                         </form>
-                      <a href="index.php" class="btn btn-success"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a>';
+                      <a href="logout.php" class="btn btn-success"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a>';
 
 
             }

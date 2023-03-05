@@ -8,7 +8,7 @@
 body {
   background-image: url('bg.png');
   background-repeat: no-repeat;
-  background-attachment: fixed; 
+  background-attachment: fixed;
   background-size: 100% 100%;
 }
 </style>
@@ -19,7 +19,18 @@ body {
 <?php
 
 // php select option value from database
+session_start();
+if(!$_SESSION['uid'])
+{
+    echo "Invalid Login";
+  echo'<a href="logout.php" class="btn btn-success"><i class="fa fa-sign-out" aria-hidden="true"></i>Login</a>';
 
+exit();
+}
+
+
+
+  $uid = $_SESSION['uid'];
 $hostname = "localhost";
 $username = "root";
 $password = "";
@@ -30,14 +41,15 @@ $databaseName = "loginsystem";
 $connect = mysqli_connect($hostname, $username, $password, $databaseName);
 
 // mysql select query
-$query = "SELECT * FROM `Trainer`";
+$query = "SELECT * FROM `user` WHERE  uid=$uid";
 
 // for method 1
 
-$result1 = mysqli_query($connect, $query);
-
-
-
+$result = mysqli_query($connect, $query);
+$row = mysqli_fetch_assoc($result);
+$uname=$row ['username'];
+$tid=$row['t_id'];
+//echo $uname;
 ?>
 <html>
   <head>
@@ -65,39 +77,43 @@ $result1 = mysqli_query($connect, $query);
       <li class="nav-item">
         <a class="nav-link" href="Trainer.php">Trainers</a>
       </li>
-     
+
 
        <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+
     </form>
-      
-     
+
+
     </ul>
 
-    
-    <?php
-                if (isset($_SESSION['u_id'])) {
+
+    <?php  //  echo $uid;
+
+                if (!isset($_SESSION['uid'])) {
+                  //echo "dryf";
               echo '<form action="index.php" method="POST">
                       <button type="submit" name="submit">logout</button>
-                        </form>'; 
-                                 } else{
-              
-              echo '<form action="index.php" method="POST">
-                              
-                                          
-                        </form>
-                      <a href="index.php" class="btn btn-success"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a>';
+                        </form>';
 
-              
+                                 } else{
+//echo $uname;
+              echo '<form action="index.php" method="POST">
+
+
+                        </form><li class="nav-item" style="color: red;"><i class="fa fa-user fa-lg" aria-hidden="true">',$uname,'&nbsp;&nbsp;&nbsp;&nbsp;</i></li>
+                      <a href="logout.php" class="btn btn-success"><i class="fa fa-sign-out" aria-hidden="true">Logout</i></a>';
+
+
             }
-           
+
             ?>
   </div>
 </nav>
-      
+
     <!--jumbotron-->
-       
+
  <div class="jumbotron" style="border-radius:0;background:url('images/bg.jpg');background-size:cover;height:400px;"><marquee style="color:green; font-size: 30px;font-style:italic;"><b></b></marquee>  </div>
 
    <div class="container-fluid">
@@ -105,57 +121,71 @@ $result1 = mysqli_query($connect, $query);
         <div class="col-md-4" >
             <div class="list-group">
                 <li class="list-group-item " style="background: black;color:white;font-size: 20px; "><i class="fa fa-users" aria-hidden="true"></i> <b>Members</b></li>
- 
-                 
-                 
+
+
+
                  <a href="view_diet.php" class="list-group-item" style="color:black;">View Diet</a>
                  <a href="view_workout.php" class="list-group-item" style="color:black;">View Workout</a>
-              
-                
-                
+
+
+
 
 
             </div>
-            
-                 
-            
+
+
+
         </div>
 
         <!--new-->
         <div class="col-md-4">
             <div class="list-group">
 <li  class="list-group-item" style="color:white;background: black;font-size: 20px;"><i class="fa fa-user-secret" aria-hidden="true"></i> <b>Trainer</b></li>
- 
 
 
 
-<a href="view_selected_trainer.php" class="list-group-item " style="color:black;"><u>Trainer details</u></a> 
-<a href="trainer.php" class="list-group-item " style="color:black;"><u>All Trainers</u></a>
+<?php  //  echo $uid;
+
+            if (is_null($tid))
+             {
+              //echo "dryf";
+              //echo '<a href="trainer.php" class="list-group-item " style="color:black;"><u>Trainer</u></a>';
+echo "<a href='trainer.php?id=" . $row["uid"] . "' class='list-group-item' style='color:black' >Trainer</a>";
+             }
+            else{
+                //echo $uname;
+                  echo '<a href="traineru.php" class="list-group-item " style="color:black;"><u>Trainer</u></a>';
 
 
-         
-            </div> 
+              }
+
+        ?>
+
+
+
+
+            </div>
           </div>
 
 
-         
+
 
         </div> <hr style="border-color:green;"></div>
-     
 
-            
+
+
         </div>
        </div>
        <hr style="border-color:green;">
- 
 
-    
 
-   
+
+
+
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 
      </body>
-    
+
 </html>
 </head>

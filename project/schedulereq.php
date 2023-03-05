@@ -2,7 +2,7 @@
 <?php include("func.php");?>
 <html>
 <head>
-	<title>Trainer details</title>
+	<title>Trainer Requests</title>
 	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 </head>
 <body>
@@ -35,14 +35,14 @@
     </form>
   </div>
 </nav>
-<div class="jumbotron" style="background: url('images/2.png') no-repeat;background-size: cover;height: 700px;">
+<div class="jumbotron" style="background: url('images/2.jpg') no-repeat;background-size: cover;height: 300px;"></div>
 
  <div class="container">
 <div class="card">
      <div class="card-body" style="background-color:black;color:white;">
          <div class="row">
              <div class="col-md-1">
-    <a href="user.php" class="btn btn-light ">Go Back</a>
+    <a href="admin-panel.php" class="btn btn-light ">Go Back</a>
              </div>
              <div class="col-md-3"><h3> Trainer Information</h3></div>
              <div class="col-md-8">
@@ -52,12 +52,11 @@
     <table class="table table-hover">
         <thead>
      <tr>
-			 <th>Name</th>
-			 <th>Age</th>
-			 <th>Gender</th>
-			 <th>Height</th>
-			 <th>Weight</th>
+            <th>User</th>
+            <th>Trainer</th>
 
+             <th>Approve</th>
+						 <th>Reject	</th>
         </tr>
         </thead>
         <tbody>
@@ -65,35 +64,30 @@
 
 
           global $con;
-           $query="select * from trainer where approve='yes'";
+           $query="select * from req ";
            $result=mysqli_query($con,$query);
-					 while ($row=mysqli_fetch_array($result)){
-								$name=$row ['username'];
-					 $age=$row['age'];
-					 $gender=$row['gender'];
-					 $height=$row['height'];
-					 $weight=$row['weight'];
-
-						 echo "<tr>
-
-							 <td>$name</td>
-									 <td>$age</td>
-									 <td>$gender</td>
-								 <td>$height</td>
-				 <td>$weight</td> ";
+					 $result=mysqli_query($con,$query);
+					while ($row=mysqli_fetch_array($result)){
+								 $name=$row ['uid'];
+						$age=$row['tid'];
 
 
-          if (isset($_GET['id'])) {
- $id = $_GET['id'];
-					///	session_start();
-						//	 $uid = $_SESSION['uid'];
-                      echo "<td><a href='select.php?id=" . $row["Trainer_id"] . "'  >Select</a></td> ";
+						echo "<tr>
 
-                     }
-               }     ?>
+							<td>$name</td>
+									<td>$age</td>
+
+                   <td><a href='set.php?id1=". $name ."&id2=".$age."'  >Approve</a></td>
+
+               </tr>";
+
+
+               }
+
+                   ?>
         </tbody>
     </table>
-</div>
+
      </div>
     </div>
     </div>
