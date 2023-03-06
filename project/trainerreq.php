@@ -23,9 +23,6 @@
       <li class="nav-item active">
         <a class="nav-link" href="Trainer.php">Trainers</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="package.php">Package</a>
-      </li>
 
 
     </ul>
@@ -57,7 +54,8 @@
 						<th>Gender</th>
 						<th>Height</th>
 						<th>Weight</th>
-        
+						<th>
+</th>
              <th>Approve</th>
 						 <th>Reject	</th>
         </tr>
@@ -76,15 +74,38 @@
 						$gender=$row['gender'];
 						$height=$row['height'];
 						$weight=$row['weight'];
-
+						$fi=$row['file'];
 						echo "<tr>
 
 							<td>$name</td>
 									<td>$age</td>
 									<td>$gender</td>
 								<td>$height</td>
-				<td>$weight</td>
-                   <td><a href='approvetr.php?id=" . $row["Trainer_id"] . "'  >Approve</a></td>
+				<td>$weight</td><td>
+";
+
+
+$dir = "uploads"; // replace "folder" with the name of the folder you want to display files for
+
+// Open a directory, and read its contents
+if (is_dir($dir)){
+	if ($dh = opendir($dir)){
+		while (($file = readdir($dh)) !== false){
+				$a=  $dir . '/' . $file ;
+
+
+			if ($fi == $a) {
+
+				//echo $a;
+				echo '<a href="' . $dir . '/' . $file . '">  Certificate  </a><br>';
+			}
+		}
+		closedir($dh);
+	}
+}
+
+
+        echo "  </td>	         <td><a href='approvetr.php?id=" . $row["Trainer_id"] . "'  >Approve</a></td>
 									 <td><a href='rejecttr.php?id=" . $row["Trainer_id"] . "' >Reject</a></td></tr>
                </tr>";
 
