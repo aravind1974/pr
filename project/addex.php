@@ -11,13 +11,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
      $sets = $_POST['sets'];
 
 
-
+     $id=$_GET['id'];
+     echo $id;
 $sql="INSERT INTO `workout` ( `e_name`, `sets`, `reps`) VALUES ('$name' ,'$reps' ,'$sets' )";
  $result = mysqli_query($conn, $sql);
 
   if($result)
   {
-    header('Location:workout.php');
+
+   //header('Location:workout.php?id= '.$id.'');
 
   }
 
@@ -55,7 +57,7 @@ $sql="INSERT INTO `workout` ( `e_name`, `sets`, `reps`) VALUES ('$name' ,'$reps'
             <div class="card-body" style="background-color:grey;">
               <center style="">
 
-              <form class="form-group" method="POST" action="addex.php">
+              <form class="form-group" method="POST" action="addex.php?id=".$id." ">
                 <div class="row">
                   <div class="col-md-4"><label style="color: white;">  Exercise Name:</label></div>
                   <div class="col-md-8"><input type="text" name="name" class="form-control" placeholder="Enter name" required/></div><br><br>
@@ -66,7 +68,7 @@ $sql="INSERT INTO `workout` ( `e_name`, `sets`, `reps`) VALUES ('$name' ,'$reps'
 
                 </div>
                 <center><input type="submit" id="inputbtn" name="login_submit" value="Add workout" class="btn btn-success"> </center>
-                <br><br><a href="workout.php">Go to workout page</a>
+                
             </center>
             </div>
           </div>

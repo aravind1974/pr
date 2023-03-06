@@ -112,7 +112,13 @@
 						 } else {
 						     echo "0 results";
 						 }
-						 echo'<br><a href="addex.php" class="btn btn-success"><i class="fa fa-sign-out" aria-hidden="true"></i>Add new exercise</a>';// echo "<input type='submit' value='Submit'>";
+             
+   $id=$_GET['id'];
+
+?>
+<br><a href='addex.php?id=<?php echo $id ;?>'><i class="fa fa-sign-out" aria-hidden="true"></i>Add new exercise</a>
+
+						<?php //echo'<br><a href="addex.php" class="btn btn-success"><i class="fa fa-sign-out" aria-hidden="true"></i>Add new exercise</a>';// echo "<input type='submit' value='Submit'>";
 
 						 // Close connection
 						 $conn->close();
@@ -142,7 +148,7 @@ $name=$_POST['name'];
 															{
 
 																$id=$_GET['id'];
-																header('Location:workouts.php?id='.$id.' ');
+																header('Location:workouts.php?id='.$id.'  ');
 
 															}
 

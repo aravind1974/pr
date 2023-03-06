@@ -114,9 +114,9 @@ $result1 = mysqli_query($connect, $query);
             <div class="list-group">
 <li  class="list-group-item" style="color:white;background: black;font-size: 20px;"> <b>Trainer</b></li>
 
-<a href="trainer.php" class="list-group-item " style="color:black;"><u>Trainer details</u></a>
-<a href="trainerreq.php" class="list-group-item " style="color:black;"><u>Add new Trainer</u></a>
 
+<a href="trainerreq.php" class="list-group-item " style="color:black;"><u>Add new Trainer</u></a>
+<a href="trainer.php" class="list-group-item " style="color:black;"><u>Trainer details</u></a>
 
 
             </div>
@@ -125,9 +125,9 @@ $result1 = mysqli_query($connect, $query);
 
           <div class="col-md-4">
             <div class="list-group">
-<li  class="list-group-item" style="color:white;background: black;font-size: 20px;"> <b>Schedule</b></li>
+<li  class="list-group-item" style="color:white;background: black;font-size: 20px;"> <b>Assign</b></li>
 
-                <a href="schedulereq.php" class="list-group-item"  style="color:black;"><u>Schedule Requests</u></a>
+                <a href="schedulereq.php" class="list-group-item"  style="color:black;"><u>Trainer assign</u></a>
 
 
 
