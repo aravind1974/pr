@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<?php include("func.php");?>
+<?php include("func.php");
+
+if(isset($_SERVER['HTTP_REFERER'])) {
+    $previous_page = $_SERVER['HTTP_REFERER'];}?>
 <html>
 <head>
 	<title>Members details</title>
@@ -34,14 +37,14 @@
   </div>
 </nav>
 
-<div class="jumbotron" style="background: url('images/2.jpg') no-repeat;background-size: cover;height: 300px;"></div>
+<div class="jumbotron" style="background: url('images/2.jpg') no-repeat;background-size: cover;height: 700px;">
 
  <div class="container">
 <div class="card">
      <div class="card-body" style="background-color:black;color:white;">
          <div class="row">
              <div class="col-md-1">
-    <a href="admin-panel.php" class="btn btn-light "> Back</a>
+    	<?php echo "<a href=\"$previous_page\" class='btn btn-light '>Go back </a>";?>
              </div>
              <div class="col-md-3"><h3>Members Details</h3></div>
              <div class="col-md-8">
@@ -68,7 +71,7 @@
         <tbody>
           <?php
 $id=$_GET['id'];
-echo $id;
+//echo $id;
            $con=mysqli_connect("localhost","root","","loginsystem");
           $query="select * from user where approve='YES' and t_id={$id}";
           $result=mysqli_query($con,$query);
@@ -90,7 +93,7 @@ echo $id;
          <td>$weight</td>
         <td>$tid</td>
         <td><a href='workouts.php?id=" . $uid . "'  >Workout</a></td>
-        <td><a href='diet.php?id=" . $uid. "'  >Diet</a></td>
+        <td><a href='dietassign.php?id=" . $uid. "'  >Diet</a></td>
               </tr>";
           }
 
@@ -100,7 +103,7 @@ echo $id;
      </div>
     </div>
     </div>
-
+</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>

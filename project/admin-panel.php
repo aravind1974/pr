@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <?php
 
 // php select option value from database
@@ -73,8 +73,6 @@ $result1 = mysqli_query($connect, $query);
                                  } else{
 
               echo '<form action="index.php" method="POST">
-
-
                         </form>
                       <a href="logout.php" class="btn btn-success"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a>';
 

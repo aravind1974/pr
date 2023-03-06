@@ -142,7 +142,7 @@ $uname=$row ['username'];
         <!--new-->
         <div class="col-md-4">
             <div class="list-group">
-<li  class="list-group-item" style="color:white;background: black;font-size: 20px;"><i class="fa fa-user-secret" aria-hidden="true"></i> <b>Trainer</b></li>
+
 
 
 

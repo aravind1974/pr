@@ -1,8 +1,47 @@
 <!DOCTYPE html>
-<?php include("func.php");?>
+<?php
+  						 // Close connection
+						// $conn->close();
+				
+						 // Save selected checkboxes into variables
+
+						 $servername = "localhost";
+             $username = "root";
+             $password = "";
+             $dbname = "loginsystem";
+ $id=$_GET['id'];
+             // Create connection
+             $conn = mysqli_connect($servername, $username, $password, $dbname);
+             if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                $selected_id = $_POST["selected"];
+                $sql = "UPDATE `user` SET `wid` = $selected_id WHERE `user`.`uid`  = $id";
+    $result = $conn->query($sql);
+		if($result)
+		{
+			header("Location:trainerhome.php");
+
+		}
+
+
+
+             }
+
+/*...................
+
+             if (mysqli_num_rows($result) > 0) {
+               // output data of each row
+               while($row = mysqli_fetch_assoc($result)) {
+                 echo "<tr><td>" . $row["e_name"]. "</td><td>" . $row["reps"]. "</td><td>" . $row["sets"]. "</td><td><input type='checkbox' name='selected[]' value='" . $row["e_name"] . "'></td></tr>";
+               }
+             } else {
+               echo "0 results";
+             }
+
+             mysqli_close($conn);*/
+           ?><?php include("func.php");?>
 <html>
 <head>
-	<title>Trainer details</title>
+	<title>Workouts</title>
 	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 </head>
 <body>
@@ -42,7 +81,17 @@
              </div>
              <div class="col-md-3"><h3> Assign  workout</h3></div>
 
-             <div class="col-md-8">
+						 <?php
+						 $query="select * from user where uid=$id";
+						 $result=mysqli_query($con,$query);
+
+						while ($row=mysqli_fetch_array($result)){
+								 $name=$row['wid'];
+								 if($name!=NULL){
+									 echo"<a href='wo.php?id=$id '>View Assigned workout</a>";
+}
+}
+      ?>       <div class="col-md-8">
         </div></div></div></div>
      <div class="card-body" style="background-color:grey;color:#ffffff;">
          <div class="card-body">
@@ -55,6 +104,7 @@
 						<th>e3</th>
             <th>e4</th>
             <th>e5</th>
+						<th>Select A Workout</th>
 
         </tr>
         </thead>
@@ -104,34 +154,7 @@
   // echo $id;
    //echo`<a href='workouts.php?id=" . $uid . "'  >Workout</a>`;?>
 <br><a href='workout.php?id=<?php echo $id ;?>'><i class="fa fa-sign-out" aria-hidden="true"></i>Add new workout</a>
-<?php
-  						 // Close connection
-						// $conn->close();
 
-						 // Save selected checkboxes into variables
-
-             if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                $selected_id = $_POST["selected"];
-                $sql = "UPDATE `user` SET `wid` = $selected_id WHERE `user`.`uid`  = $id";
-    $result = $conn->query($sql);
-
-
-
-             }
-
-/*...................
-
-             if (mysqli_num_rows($result) > 0) {
-               // output data of each row
-               while($row = mysqli_fetch_assoc($result)) {
-                 echo "<tr><td>" . $row["e_name"]. "</td><td>" . $row["reps"]. "</td><td>" . $row["sets"]. "</td><td><input type='checkbox' name='selected[]' value='" . $row["e_name"] . "'></td></tr>";
-               }
-             } else {
-               echo "0 results";
-             }
-
-             mysqli_close($conn);*/
-           ?>
         </tbody>
     </table>
 

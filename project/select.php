@@ -7,7 +7,7 @@ $tid=$_GET['id'];
 $conn=mysqli_connect("localhost","root","","loginsystem") or die("connection failed");
 $sql="select * from req where `uid`={$uid}";
 $result=mysqli_query($conn,$sql) ;
-$r=mysqli_fetch_array($result)
+$r=mysqli_fetch_array($result);
 if(!$r)
         {
           $sql="INSERT INTO `req` (`uid`, `tid`) VALUES ({$uid}, {$tid});";

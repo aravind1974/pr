@@ -69,11 +69,9 @@ $tid=$row['t_id'];
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="admin-panel.php">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="user.php">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="member_details.php">Members</a>
-      </li>
+    
       <li class="nav-item">
         <a class="nav-link" href="Trainer.php">Trainers</a>
       </li>
@@ -125,7 +123,7 @@ $tid=$row['t_id'];
 
 
                  <a href="view_diet.php" class="list-group-item" style="color:black;">View Diet</a>
-                 <a href="view_workout.php" class="list-group-item" style="color:black;">View Workout</a>
+                 <a href="wo.php?id=<?php echo $uid;?>" class="list-group-item" style="color:black;">View Workout</a>
 
 
 

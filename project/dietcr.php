@@ -29,13 +29,13 @@ $id5 = $selected[4] ?? 0;
 
 echo $name;
 								 //echo "Selected ID: " . $id1 . "<br>";
-								 $sql="INSERT INTO `wo` (`ename`,`e1`, `e2`, `e3`, `e4`, `e5`) VALUES('$name',$id1,$id2,$id3,$id4,$id5)";
+								 $sql="INSERT INTO diet (ename,e1, e2, e3, e4, e5) VALUES('$name','$id1','$id2','$id3','$id4','$id5')";
 									$result=mysqli_query($conn,$sql)or die("error");
 									if($result)
 									{
 
 										$id=$_GET['id'];
-										header("Location:workouts.php?id=".$id);
+										header("Location:dietassign.php?id=".$id);
 //header("Location: workout.php?id=".$id);
 									}
 
@@ -100,7 +100,7 @@ echo $name;
              <div class="col-md-1">
 
              </div>
-             <div class="col-md-3"><h3> Create a new workout</h3></div>
+             <div class="col-md-3"><h3> Create a new Diet</h3></div>
 
              <div class="col-md-8">
          <form class="form-group" action="patient_search.php" method="post">
@@ -122,8 +122,8 @@ echo $name;
         <thead>
      <tr>
             <th>Name</th>
-            <th>Sets</th>
-            <th>Reps</th>
+            <th>Quantity</th>
+            <th>Calories</th>
 						<th>Select upto 5 </th>
 
         </tr>
@@ -141,7 +141,7 @@ echo $name;
                die("Connection failed: " . mysqli_connect_error());
              }
 
-             $sql = "SELECT * FROM workout";
+             $sql = "SELECT * FROM food";
              $result = mysqli_query($conn, $sql);
 
 
@@ -171,7 +171,7 @@ echo $name;
    $id=$_GET['id'];
 
 ?>
-<br><a href='addex.php?id=<?php echo $id ;?>'><i class="fa fa-sign-out" aria-hidden="true"></i>Add new exercise</a>
+<br><a href='adddiet.php?id=<?php echo $id ;?>'><i class="fa fa-sign-out" aria-hidden="true"></i>Add new food</a>
 
 
         </tbody>

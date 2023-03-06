@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<?php include("func.php");?>
+<?php include("func.php");
+if(isset($_SERVER['HTTP_REFERER'])) {
+    $previous_page = $_SERVER['HTTP_REFERER'];}
+?>
 <html>
 <head>
 	<title>Trainer details</title>
@@ -15,16 +18,13 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item ">
-        <a class="nav-link" href="admin-panel.php">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="user.php">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="member_details.php">Members</a>
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="Trainer.php">Trainers</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="package.php">Package</a>
       </li>
 
 
@@ -42,9 +42,9 @@
      <div class="card-body" style="background-color:black;color:white;">
          <div class="row">
              <div class="col-md-1">
-    <a href="user.php" class="btn btn-light ">Go Back</a>
+  	<?php echo "<a href=\"$previous_page\" class='btn btn-light '>Go back </a>";?>
              </div>
-             <div class="col-md-3"><h3> Trainer Information</h3></div>
+             <div class="col-md-3"><h3> Selected Trainer Information</h3></div>
              <div class="col-md-8">
          </div></div>
      <div class="card-body" style="background-color:grey;color:#ffffff;">

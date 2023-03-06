@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $id=$_POST['id'];
 
 
-$sql="INSERT INTO `workout` ( `e_name`, `sets`, `reps`) VALUES ('$name' ,'$reps' ,'$sets' )";
+$sql="INSERT INTO `food` ( `e_name`, `sets`, `reps`) VALUES ('$name' ,'$reps' ,'$sets' )";
  $result = mysqli_query($conn, $sql);
 
   if($result)
@@ -20,8 +20,8 @@ $sql="INSERT INTO `workout` ( `e_name`, `sets`, `reps`) VALUES ('$name' ,'$reps'
   //  $id=$POST['id'];
     echo $id;
 
-    header("Location: workout.php?id=".$id);
-   //header('Location:workout.php?id='. $id);
+    header("Location: dietcr.php?id=".$id);
+   //header('Location:dietcr.php?id='. $id);
 //echo $id;
   }
   else{
@@ -63,20 +63,20 @@ $sql="INSERT INTO `workout` ( `e_name`, `sets`, `reps`) VALUES ('$name' ,'$reps'
             <div class="card-body" style="background-color:grey;">
               <center style="">
 
-              <form class="form-group" method="POST" action="addex.php">
+              <form class="form-group" method="POST" action="adddiet.php">
                 <input type='hidden' name='id' value='<?php echo $_GET['id'];?>' />
                 <div class="row">
-                  <div class="col-md-4"><label style="color: white;">  Exercise Name:</label></div>
+                  <div class="col-md-4"><label style="color: white;">  Food Name:</label></div>
                   <div class="col-md-8"><input type="text" name="name" class="form-control" placeholder="Enter name" required/></div><br><br>
-                  <div class="col-md-4"><label  style="color: white;">Sets: </label></div>
-                  <div class="col-md-8"><input type="number" class="form-control" name="sets" placeholder="Enter no of sets" required/></div><br><br>
-                  <div class="col-md-4"><label  style="color: white;">Reps: </label></div>
-                  <div class="col-md-8"><input type="number" class="form-control" name="reps" placeholder="Enter no of reps" required/></div><br><br><br>
+                  <div class="col-md-4"><label  style="color: white;">Quantity: </label></div>
+                  <div class="col-md-8"><input type="number" class="form-control" name="sets" placeholder="Enter no of quantity" required/></div><br><br>
+                  <div class="col-md-4"><label  style="color: white;">Calories: </label></div>
+                  <div class="col-md-8"><input type="number" class="form-control" name="reps" placeholder="Enter no of calories" required/></div><br><br><br>
 
                     <?php $id=$_GET['id'];
                     //echo $id;?>
                 </div>
-                <center><input type="submit" id="inputbtn" name="login_submit" value="Add workout" class="btn btn-success"> </center>
+                <center><input type="submit" id="inputbtn" name="login_submit" value="Add diet" class="btn btn-success"> </center>
 
             </center>
             </div>

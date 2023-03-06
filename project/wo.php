@@ -1,11 +1,5 @@
 <!DOCTYPE html>
-<?php include("func.php");
-if(isset($_SERVER['HTTP_REFERER'])) {
-    $previous_page = $_SERVER['HTTP_REFERER'];
-}
-
-
-?>
+<?php include("func.php");?>
 <html>
 <head>
 	<title>Trainer details</title>
@@ -21,7 +15,7 @@ if(isset($_SERVER['HTTP_REFERER'])) {
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item ">
-        <a class="nav-link" href=".php">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="admin-panel.php">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="member_details.php">Members</a>
@@ -29,7 +23,9 @@ if(isset($_SERVER['HTTP_REFERER'])) {
       <li class="nav-item active">
         <a class="nav-link" href="Trainer.php">Trainers</a>
       </li>
-
+      <li class="nav-item">
+        <a class="nav-link" href="package.php">Package</a>
+      </li>
 
 
     </ul>
@@ -46,10 +42,9 @@ if(isset($_SERVER['HTTP_REFERER'])) {
      <div class="card-body" style="background-color:black;color:white;">
          <div class="row">
              <div class="col-md-1">
-
-		<?php echo "<a href=\"$previous_page\" class='btn btn-light '>Go back </a>";?>
+    <a href="user.php" class="btn btn-light ">Go Back</a>
              </div>
-             <div class="col-md-3"><h3> Trainer Information</h3></div>
+             <div class="col-md-3"><h3> Workout Information</h3></div>
              <div class="col-md-8">
          </div></div>
      <div class="card-body" style="background-color:grey;color:#ffffff;">
@@ -57,11 +52,11 @@ if(isset($_SERVER['HTTP_REFERER'])) {
     <table class="table table-hover">
         <thead>
      <tr>
+			 <th>Eid</th>
 			 <th>Name</th>
-			 <th>Age</th>
-			 <th>Gender</th>
-			 <th>Height</th>
-			 <th>Weight</th>
+			 <th>Sets</th>
+			 <th>Reps</th>
+
 
         </tr>
         </thead>
@@ -70,29 +65,46 @@ if(isset($_SERVER['HTTP_REFERER'])) {
 
 
           global $con;
-           $query="select * from trainer where approve='yes'";
+
+          $id=$_GET['id'];
+           $query="select wid from user where uid=$id";
            $result=mysqli_query($con,$query);
 					 while ($row=mysqli_fetch_array($result)){
-								$name=$row ['username'];
-					 $age=$row['age'];
-					 $gender=$row['gender'];
-					 $height=$row['height'];
-					 $weight=$row['weight'];
+								$name=$row ['wid'];
+$qu="select * from wo where wid=$name";
+$res=mysqli_query($con,$qu);
+while ($row=mysqli_fetch_array($res)){
+$wname=$row['ename'];
+  	$n1=$row ['e1'];
+    $n2=$row ['e2'];
+    $n3=$row ['e3'];
+    $n4=$row ['e4'];
+   $n5=$row ['e5'];
+  $q1="select * from workout where eid=$n1 or eid=$n2 or eid=$n3 or eid=$n4 or eid=$n5";
+  $re=mysqli_query($con,$q1);
+	echo "Workout Name: ".$wname;
+  while ($row=mysqli_fetch_array($re)){
 
+
+    $ename=$row ['e_name'];
+    $sets=$row ['sets'];
+    $reps=$row ['reps'];
+    $eid=$row ['eid'];
 						 echo "<tr>
-
-							 <td>$name</td>
-									 <td>$age</td>
-									 <td>$gender</td>
-								 <td>$height</td>
-				 <td>$weight</td> ";
+<td>$eid</td>
+             <td>$ename</td>
+             <td>$sets</td>
+             <td>$reps</td>
 
 
+             </tr>	 ";}
+
+}
           if (isset($_GET['id'])) {
- $id = $_GET['id'];
+ //$id = $_GET['id'];
 					///	session_start();
 						//	 $uid = $_SESSION['uid'];
-                      echo "<td><a href='select.php?id=" . $row["Trainer_id"] . "'  >Select</a></td> ";
+            //          echo "<td><a href='select.php?id=" . $row["Trainer_id"] . "'  >Select</a></td> ";
 
                      }
                }     ?>

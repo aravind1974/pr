@@ -1,66 +1,47 @@
 <!DOCTYPE html>
-<?php //echo'<br><a href="addex.php" class="btn btn-success"><i class="fa fa-sign-out" aria-hidden="true"></i>Add new exercise</a>';// echo "<input type='submit' value='Submit'>";
+<?php
+  						 // Close connection
+						// $conn->close();
 
- // Close connection
- //$conn->close();
-  $servername = "localhost";
-		$username = "root";
-		$password = "";
-		$dbname = "loginsystem";
+						 // Save selected checkboxes into variables
 
-		// Create connection
-$conn = mysqli_connect($servername, $username, $password, $dbname);
- // Save selected checkboxes into variables
- if ($_SERVER["REQUEST_METHOD"] == "POST") {
-		 if (isset($_POST["selected"])) {
-				 $selected = $_POST["selected"];
-				 $count = count($selected);
-				 if ($count > 5) {
-						 echo "You can only select up to 5 checkboxes.";
-				 } else {
-						 // Process selected checkboxes
-				{
-$name=$_POST['name'];
-								 $id1 = $selected[0];
-$id2 = $selected[1] ?? 0; // Assign null if not set
-$id3 = $selected[2] ?? 0;
-$id4 = $selected[3] ?? 0;
-$id5 = $selected[4] ?? 0;
+						 $servername = "localhost";
+             $username = "root";
+             $password = "";
+             $dbname = "loginsystem";
+ $id=$_GET['id'];
+             // Create connection
+             $conn = mysqli_connect($servername, $username, $password, $dbname);
+             if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                $selected_id = $_POST["selected"];
+                $sql = "UPDATE `user` SET `did` = $selected_id WHERE `user`.`uid`  = $id";
+    $result = $conn->query($sql);
+		if($result)
+		{
+			header("Location:trainerhome.php");
 
-echo $name;
-								 //echo "Selected ID: " . $id1 . "<br>";
-								 $sql="INSERT INTO `wo` (`ename`,`e1`, `e2`, `e3`, `e4`, `e5`) VALUES('$name',$id1,$id2,$id3,$id4,$id5)";
-									$result=mysqli_query($conn,$sql)or die("error");
-									if($result)
-									{
+		}
 
-										$id=$_GET['id'];
-										header("Location:workouts.php?id=".$id);
-//header("Location: workout.php?id=".$id);
-									}
 
-						 }
-				 }
-		 }
- }
+
+             }
 
 /*...................
- if (mysqli_num_rows($result) > 0) {
-	 // output data of each row
-	 while($row = mysqli_fetch_assoc($result)) {
-		 echo "<tr><td>" . $row["e_name"]. "</td><td>" . $row["reps"]. "</td><td>" . $row["sets"]. "</td><td><input type='checkbox' name='selected[]' value='" . $row["e_name"] . "'></td></tr>";
-	 }
- } else {
-	 echo "0 results";
- }
- mysqli_close($conn);*/
-?>
 
+             if (mysqli_num_rows($result) > 0) {
+               // output data of each row
+               while($row = mysqli_fetch_assoc($result)) {
+                 echo "<tr><td>" . $row["e_name"]. "</td><td>" . $row["reps"]. "</td><td>" . $row["sets"]. "</td><td><input type='checkbox' name='selected[]' value='" . $row["e_name"] . "'></td></tr>";
+               }
+             } else {
+               echo "0 results";
+             }
 
-<?php include("func.php");?>
+             mysqli_close($conn);*/
+           ?><?php include("func.php");?>
 <html>
 <head>
-	<title>Trainer details</title>
+	<title>Diet</title>
 	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 </head>
 <body>
@@ -82,8 +63,6 @@ echo $name;
         <a class="nav-link" href="Trainer.php">Trainers</a>
       </li>
 
-
-
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -100,79 +79,81 @@ echo $name;
              <div class="col-md-1">
 
              </div>
-             <div class="col-md-3"><h3> Create a new workout</h3></div>
+             <div class="col-md-3"><h3> Assign  Diet</h3></div>
 
-             <div class="col-md-8">
-         <form class="form-group" action="patient_search.php" method="post">
+						 <?php
+						 $query="select * from user where uid=$id";
+						 $result=mysqli_query($con,$query);
 
-
-
-
-
-
-
-
-          <div class="row">
-
-
-                 </form></div></div></div></div>
+						while ($row=mysqli_fetch_array($result)){
+								 $name=$row['did'];
+								 if($name!=NULL){
+									 echo"<a href='diet.php?id=$id '>View Assigned Diet</a>";
+}
+}
+      ?>       <div class="col-md-8">
+        </div></div></div></div>
      <div class="card-body" style="background-color:grey;color:#ffffff;">
          <div class="card-body">
     <table class="table table-hover">
         <thead>
      <tr>
             <th>Name</th>
-            <th>Sets</th>
-            <th>Reps</th>
-						<th>Select upto 5 </th>
+            <th>food1</th>
+            <th>food2</th>
+						<th>food3</th>
+            <th>food4</th>
+            <th>food5</th>
+						<th>Select A Diet</th>
 
         </tr>
         </thead>
         <tbody>
            <?php
-					 $servername = "localhost";
-				 		$username = "root";
-				 		$password = "";
-				 		$dbname = "loginsystem";
+             $servername = "localhost";
+             $username = "root";
+             $password = "";
+             $dbname = "loginsystem";
 
+             // Create connection
              $conn = mysqli_connect($servername, $username, $password, $dbname);
              // Check connection
              if (!$conn) {
                die("Connection failed: " . mysqli_connect_error());
              }
 
-             $sql = "SELECT * FROM workout";
+             $sql = "SELECT * FROM diet";
              $result = mysqli_query($conn, $sql);
 
 
 //....................
 						 if ($result->num_rows > 0) {
-						     echo '<form method="post">
-								 <div class="col-md-4"><label style="color: white;">  Name:</label></div>
-							 	<div class="col-md-8"><input type="text" name="name" class="form-control" placeholder="Enter name" required/></div><br><br>';
+						     echo "<form method='post'>";
 
 
 						     while($row = $result->fetch_assoc()) {
 						         echo "<tr>";
-						         echo "<td>" . $row["e_name"] . "</td>";
-						         echo "<td>" . $row["reps"] . "</td>";
-						         echo "<td>" . $row["sets"] . "</td>";
-						         echo "<td><input type='checkbox' name='selected[]' value='" . $row["eid"] . "'></td>";
+						         echo "<td>" . $row["ename"] . "</td>";
+						         echo "<td>" . $row["e1"] . "</td>";
+                       echo "<td>" . $row["e2"] . "</td>";
+                       echo "<td>" . $row["e3"] . "</td>";
+                         echo "<td>" . $row["e4"] . "</td>";
+                           echo "<td>" . $row["e5"] . "</td>";
+						          echo "<td><input type='radio' name='selected' value='" . $row["wid"] . "'></td>";
+
 						         echo "</tr>";
 						     }
 						     echo "</table>";
 								 echo '<center><input type="submit" id="inputbtn" name="submit" value="Submit" class="btn btn-success"> </center>';
-
+						    //echo'<br><a href="addex.php" class="btn btn-success"><i class="fa fa-sign-out" aria-hidden="true"></i>Add new exercise</a>';// echo "<input type='submit' value='Submit'>";
 						     echo "</form>";
 						 } else {
 						     echo "0 results";
 						 }
-
    $id=$_GET['id'];
-
-?>
-<br><a href='addex.php?id=<?php echo $id ;?>'><i class="fa fa-sign-out" aria-hidden="true"></i>Add new exercise</a>
-
+  // echo $id;
+   //echo`<a href='workouts.php?id=" . $uid . "'  >Workout</a>`;?>
+<br><a href='dietcr.php?id=<?php echo $id ;?>'><i class="fa fa-sign-out" aria-hidden="true"></i>Add new Diet</a>
 
         </tbody>
     </table>
