@@ -57,7 +57,8 @@ if(isset($_SERVER['HTTP_REFERER'])) {
 			 <th>Gender</th>
 			 <th>Height</th>
 			 <th>Weight</th>
-
+       <th>Certificate
+     </th>
         </tr>
         </thead>
         <tbody>
@@ -84,6 +85,25 @@ if(isset($_SERVER['HTTP_REFERER'])) {
 									 <td>$gender</td>
 								 <td>$height</td>
 				 <td>$weight</td>";
+         $dir = "uploads"; // replace "folder" with the name of the folder you want to display files for
+
+         // Open a directory, and read its contents
+         if (is_dir($dir)){
+         	if ($dh = opendir($dir)){
+         		while (($file = readdir($dh)) !== false){
+         				$a=  $dir . '/' . $file ;
+
+
+         			if ($fi == $a) {
+
+         				//echo $a;
+         				echo '<a href="' . $dir . '/' . $file . '">  Certificate  </a><br>';
+         			}
+         		}
+         		closedir($dh);
+         	}
+         }
+
 
 // $id = $_GET['id'];
 
